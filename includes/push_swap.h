@@ -36,11 +36,11 @@ typedef struct s_pile
 // Moves
 void	ft_pa(t_pile *a, t_pile *b, int j);
 void	ft_sa(t_pile *a, int j);
-void	ft_ra(t_pile *a, int j);
+void	ft_ra(t_stack **a, int j);
 void	ft_rra(t_pile *a, int j);
-void	ft_pb(t_pile *a, t_pile *b, int j);
+void	ft_pb(t_stack **a, t_stack **b, int j);
 void	ft_sb(t_pile *b, int j);
-void	ft_rb(t_pile *b, int j);
+void	ft_rb(t_stack **b, int j);
 void	ft_rrb(t_pile *b, int j);
 void	ft_ss(t_pile *a, t_pile *b, int j);
 void	ft_rr(t_pile *a, t_pile *b, int j);

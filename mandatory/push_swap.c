@@ -1,6 +1,50 @@
 #include "push_swap.h"
 
-void	ft_sort_three(t_pile *a)
+void	ft_ra(t_stack **a, int j)
+{
+	t_stack	*tmp;
+
+	if (!(*a) || !(*a)->next)
+		return ;
+	tmp = *a;
+	*a = ft_lstlast(*a);
+	(*a)->next = tmp;
+	*a = tmp->next;
+	tmp->next = NULL;
+	if (j == 0) //seulement pour le checker
+		write(1, "ra\n", 3);
+}
+
+void	ft_rb(t_stack **b, int j)
+{
+	t_stack	*tmp;
+
+	if (!(*b) || !(*b)->next)
+		return ;
+	tmp = *b;
+	*b = ft_lstlast(*b);
+	(*b)->next = tmp;
+	(*b) = tmp->next;
+	tmp->next = NULL;
+	if (j == 0)
+		write(1, "rb\n", 3);
+}
+
+void	ft_pb(t_stack **a, t_stack **b, int j)
+{
+	t_stack	*tmp;
+
+	if (!(*a))
+		return ;
+	tmp = *b;
+	*b = *a;
+	*a = (*a)->next;
+	(*b)->next = tmp;
+	if (j == 0)
+		write(1, "pb\n", 3);
+}
+
+/* void	ft_sort_three(t_pile *a)
 {
 	if (ft_min(a->top) == a->top->nbr)
 	{
@@ -20,7 +64,7 @@ void	ft_sort_three(t_pile *a)
 		else
 			ft_sa(a, 0);
 	}
-}
+} */
 
 /* void	ft_sort_b_max_3(t_pile *a, t_pile *b)
 {
@@ -48,7 +92,7 @@ void	ft_sort_three(t_pile *a)
 	//fprintf(stderr, "i = %d, stack->nbr = %d\n", i, tmp->nbr);
 } */
 
-t_pile	*ft_sort_b(t_pile *a, t_pile *b)
+/* t_pile	*ft_sort_b(t_pile *a, t_pile *b)
 {
 	if (a->actual_len > 3 && !ft_issorted(a->top))
 		ft_pb(a, b, 0);
@@ -59,9 +103,9 @@ t_pile	*ft_sort_b(t_pile *a, t_pile *b)
 	if (!ft_issorted(a->top))
 		ft_sort_three(a);
 	return (b);
-}
+} */
 
-t_pile	*ft_sort_a(t_pile *a, t_pile *b)
+/* t_pile	*ft_sort_a(t_pile *a, t_pile *b)
 {
 	int		i;
 	t_stack	*tmp;
@@ -85,9 +129,9 @@ t_pile	*ft_sort_a(t_pile *a, t_pile *b)
 		}
 	}
 	return (a);
-}
+} */
 
-void make_biggest_to_top(t_pile *b)
+/* void make_biggest_to_top(t_pile *b)
 {
 	int biggest;
 	int	pos;
@@ -99,8 +143,8 @@ void make_biggest_to_top(t_pile *b)
 	b_size = b->actual_len;
 	//fprintf(stderr, "b_size = %d && b_actual_len = %d\n", b_size, b->actual_len);
 	//fprintf(stderr, "b_size = %d, pos = %d, max_low = %d, max_up = %d\n", b_size, pos, (b_size / 10) * 3, (b_size / 10) * 8);
-	/* if (pos > ((b_size / 10) * 3) && pos < ((b_size / 10) * 8))
-		return ; */
+	if (pos > ((b_size / 10) * 3) && pos < ((b_size / 10) * 8))
+		return ;
 	if (pos <= b_size / 2)
 	{
 		nb_rot = pos;
@@ -113,7 +157,7 @@ void make_biggest_to_top(t_pile *b)
 		while (nb_rot-- > 0)
 			ft_rrb(b, 0);
 	}
-}
+} */
 
 void	ft_sort_int_tab(int *tab, int size)
 {
@@ -231,6 +275,39 @@ int	*define_pivots(int *arr, int nb_chunks, int size)
 	return (pivots);
 }
 
+void	push_first_two_chunks(t_pile *a, t_pile *b, int *pivots, int chunk_size)
+{
+	//t_stack	*tmp;
+	printf("chunk_size = %d\n", chunk_size);
+	printf("pivots[0] = %d\n", pivots[0]);
+	printf("pivots[1] = %d\n", pivots[1]);
+
+	int	i;
+
+	i = 0;
+	//tmp = a->top;
+	while (i <= chunk_size && !ft_issorted(a->top) && a->actual_len > 3)
+	{
+		if (a->top->nbr <= pivots[1])
+		{
+			printf("pile->top->nbr = %d\n", a->top->nbr);
+			ft_pb(&(a->top), &(b->top), 0);
+			if (b->top->nbr <= pivots[0])
+				ft_rb(&(b->top), 0);
+			a->actual_len--;
+			b->actual_len++;
+			i++;
+		}
+		else
+		{
+			ft_ra(&(a->top), 0);	
+			//tmp = tmp->next;
+		}
+	}
+	//tmp = a->top;
+	
+}
+
 void	push_swap(t_pile *a, t_pile *b)
 {
 	int		i;
@@ -239,11 +316,11 @@ void	push_swap(t_pile *a, t_pile *b)
 	int		*pivots;
 
 	b->top = NULL;
-	if (a->full_len == 2)
+	/* if (a->full_len == 2)
 		ft_sa(a, 0);
 	else if (a->full_len == 3)
-		ft_sort_three(a);
-	else
+		ft_sort_three(a); */
+	if (a->full_len > 3)
 	{
 		pre_sort = get_tab(a);
 		if (!pre_sort)
@@ -251,18 +328,27 @@ void	push_swap(t_pile *a, t_pile *b)
 		ft_sort_int_tab(pre_sort, a->full_len);
 		nb_chunks = define_chunks(a->full_len);
 		printf("nb_chunks = %d\n", nb_chunks);
-		if (nb_chunks != 1)
-			pivots = define_pivots(pre_sort, nb_chunks, a->full_len);
+		
 		i = 0;
-		//int	first_chunk_pivot = 
-
-		while (i < nb_chunks)
+		if (nb_chunks == 1)
 		{
-			//push_two_first_chunks
-			i++;
+			printf("nb_chunks = %d\n", nb_chunks);
 		}
-		(void)pivots;
-
+		else
+		{
+			pivots = define_pivots(pre_sort, nb_chunks, a->full_len);
+			while (i < nb_chunks)
+			{
+				if (i == 0)
+					push_first_two_chunks(a, b, pivots, a->actual_len / nb_chunks * 2);
+				
+				i++;
+			}
+		}
+		printf("a>>>\n");
+		print_stack(a->top);
+		printf("b>>>\n");
+		print_stack(b->top);
 		//boucle sur chunks, 2 premiers gratuit à accomoder
 		// verif du pivot àpd 3eme
 

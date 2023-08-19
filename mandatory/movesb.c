@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void	ft_pb(t_pile *a, t_pile *b, int j)
+/* void	ft_pb(t_pile *a, t_pile *b, int j)
 {
 	t_stack	*tmp;
 
@@ -14,7 +14,7 @@ void	ft_pb(t_pile *a, t_pile *b, int j)
 	b->actual_len++;
 	if (j == 0)
 		write(1, "pb\n", 3);
-}
+} */
 
 void	ft_sb(t_pile *b, int j)
 {
@@ -30,7 +30,7 @@ void	ft_sb(t_pile *b, int j)
 		write(1, "sb\n", 3);
 }
 
-void	ft_rb(t_pile *b, int j)
+/* void	ft_rb(t_pile *b, int j)
 {
 	t_stack	*tmp;
 
@@ -43,7 +43,7 @@ void	ft_rb(t_pile *b, int j)
 	tmp->next = NULL;
 	if (j == 0)
 		write(1, "rb\n", 3);
-}
+} */
 
 void	ft_rrb(t_pile *b, int j)
 {
