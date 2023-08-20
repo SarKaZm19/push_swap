@@ -238,12 +238,12 @@ int	*define_pivots(int *arr, int nb_chunks, int size)
 	int	base_pivot;
 	int	j;
 
-	pivots = malloc(sizeof(int) * (nb_chunks));
+	pivots = malloc(sizeof(int) * ((nb_chunks * 2) - 2));
 	if (!pivots)
 		return (NULL);
 	base_pivot = (size / nb_chunks);
-	j = 1;
-	i = 0;
+	j = 3;
+	i = 2;
 	/* if (nb_chunks >= 3)
 	{
 		pivots[0] = arr[base_pivot]; 
@@ -260,37 +260,44 @@ int	*define_pivots(int *arr, int nb_chunks, int size)
 		i++;
 		j++;
 	} */
-	while (i < nb_chunks)
+	// printf("nb_chunks * 2 - 2 = %d\n", (nb_chunks * 2) - 2);
+	pivots[0] = arr[base_pivot];
+	pivots[1] = arr[base_pivot * 2];
+
+	while (i <  (nb_chunks * 2) - 2)
 	{
-		pivots[i] = arr[(base_pivot * j)];
-		if (i == nb_chunks - 1)
+		if (i == nb_chunks * 2 - 4)
+		{
+			/* printf("i = %d\n", i);
+			printf("arr[%d] = %d\n", size - 1, arr[size - 1]); */
 			pivots[i] = arr[size - 1];
-		else
+			pivots[i + 1] = arr[size - (base_pivot / 2)];
+		}
+		else if (i % 2 == 0)
 			pivots[i] = arr[(base_pivot * j)];
-		printf("arr[%d] = %d\n", (base_pivot * j), arr[(base_pivot * j)]);
-		printf("pivots[%d] = %d\n", i, pivots[i]);
+		else if (i % 2 == 1)
+		{
+			pivots[i] = arr[(base_pivot * j) - (base_pivot / 2)];
+			j++;
+		}
 		i++;
-		j++;
 	}
+	i = -1;
+	/* while (++i < nb_chunks * 2 - 2)
+		printf("pivots[%d] = %d\n", i, pivots[i]); */
 	return (pivots);
 }
 
 void	push_first_two_chunks(t_pile *a, t_pile *b, int *pivots, int chunk_size)
 {
-	//t_stack	*tmp;
-	printf("chunk_size = %d\n", chunk_size);
-	printf("pivots[0] = %d\n", pivots[0]);
-	printf("pivots[1] = %d\n", pivots[1]);
-
+	//printf("chunk_size = %d\n", chunk_size);
 	int	i;
 
 	i = 0;
-	//tmp = a->top;
 	while (i <= chunk_size && !ft_issorted(a->top) && a->actual_len > 3)
 	{
 		if (a->top->nbr <= pivots[1])
 		{
-			printf("pile->top->nbr = %d\n", a->top->nbr);
 			ft_pb(&(a->top), &(b->top), 0);
 			if (b->top->nbr <= pivots[0])
 				ft_rb(&(b->top), 0);
@@ -299,13 +306,30 @@ void	push_first_two_chunks(t_pile *a, t_pile *b, int *pivots, int chunk_size)
 			i++;
 		}
 		else
-		{
-			ft_ra(&(a->top), 0);	
-			//tmp = tmp->next;
-		}
+			ft_ra(&(a->top), 0);
 	}
-	//tmp = a->top;
-	
+}
+
+void	push_chunk(t_pile *a, t_pile *b, int *pivots, int index, int chunk_size)
+{
+	int	i;
+
+	i = 0;
+	//printf("chunk_size = %d\n", chunk_size);
+	while (i <= chunk_size && !ft_issorted(a->top) && a->actual_len > 3)
+	{
+		if (a->top->nbr <= pivots[index])
+		{
+			ft_pb(&(a->top), &(b->top), 0);
+			if (b->top->nbr <= pivots[index + 1])
+				ft_rb(&(b->top), 0);
+			a->actual_len--;
+			b->actual_len++;
+			i++;
+		}
+		else
+			ft_ra(&(a->top), 0);	
+	}
 }
 
 void	push_swap(t_pile *a, t_pile *b)
@@ -327,12 +351,12 @@ void	push_swap(t_pile *a, t_pile *b)
 			return (ft_free_all(a, b), prog_error());
 		ft_sort_int_tab(pre_sort, a->full_len);
 		nb_chunks = define_chunks(a->full_len);
-		printf("nb_chunks = %d\n", nb_chunks);
+		//printf("nb_chunks = %d\n", nb_chunks);
 		
 		i = 0;
 		if (nb_chunks == 1)
 		{
-			printf("nb_chunks = %d\n", nb_chunks);
+			//printf("nb_chunks = %d\n", nb_chunks);
 		}
 		else
 		{
@@ -340,15 +364,18 @@ void	push_swap(t_pile *a, t_pile *b)
 			while (i < nb_chunks)
 			{
 				if (i == 0)
-					push_first_two_chunks(a, b, pivots, a->actual_len / nb_chunks * 2);
-				
+				{
+					push_first_two_chunks(a, b, pivots, (a->full_len / nb_chunks) * 2);
+					i += 2;
+				}
+				push_chunk(a, b, pivots, i, a->full_len / nb_chunks);
 				i++;
 			}
 		}
-		printf("a>>>\n");
+		/* printf("a>>>\n");
 		print_stack(a->top);
 		printf("b>>>\n");
-		print_stack(b->top);
+		print_stack(b->top); */
 		//boucle sur chunks, 2 premiers gratuit à accomoder
 		// verif du pivot àpd 3eme
 

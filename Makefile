@@ -10,21 +10,12 @@ LIB = libft/libft.a
 
 #          ----------========== {     SRCS     } ==========----------
 
-MANDATORY_SRCS =	apply_rotations.c \
-					candidates.c \
-					errors.c \
-					find_place.c \
-					find_rotation.c \
+MANDATORY_SRCS =	errors.c \
 					ft_free.c \
 					get_datas.c \
 					main.c \
 					min_max.c \
-					movesa.c \
-					movesb.c \
-					movesab.c \
 					push_swap.c \
-					utils_rot_atob.c \
-					utils_rot_btoa.c \
 					utils.c
 
 BONUS_SRCS = 		exec_bonus.c \
