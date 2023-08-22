@@ -31,25 +31,33 @@ int	ft_issorted(t_stack *lst)
 
 //int COUNT_OPERATIONS;
 
+void	print_info(t_pile *a)
+{
+	printf("a->actual_len = %d\n", a->actual_len);
+	printf("a->full_len = %d\n", a->full_len);
+	printf("a->nb_chunks = %d\n", a->nb_chunks);
+	int i = -1;
+	if (a->nb_chunks > 1)
+	{
+		while (++i < a->nb_chunks * 2 - 2)
+			printf("pivots[%d] = %d\n", i, a->pivots[i]);
+	}
+	i = -1;
+	while (++i < a->full_len)
+		printf("arr[%d] = %d\n", i, a->pre_sort[i]);
+}
+
 int main(int ac, char **av)
 {
 	t_pile	*pile_a;
 	t_pile	*pile_b;
-	//COUNT_OPERATIONS = 0;
-	pile_a = malloc(sizeof(t_pile));
-	pile_b = malloc(sizeof(t_pile));
+
+	pile_a = init_pile_a(ac, av);
+	print_info(pile_a);
+	pile_b = init_pile_b(pile_a);
+	print_info(pile_b);
 	if (!pile_a || !pile_b)
 		return (prog_error(), 1);
-	pile_a->top = get_av(ac, av);
-	if (!pile_a->top)
-		return (free(pile_a), prog_error(), 1);
-	pile_b->top = NULL;
-	pile_b->full_len = 0;
-	pile_b->actual_len = pile_b->full_len;
-	pile_a->full_len = ft_lstsize(pile_a->top);
-	//fprintf(stderr, "pile_a->len = %d\n", pile_a->full_len);
-	pile_a->actual_len = pile_a->full_len;
-	//print_stack(pile_a->top);
 	if (!ft_issorted(pile_a->top))
 		push_swap(pile_a, pile_b);
 	if (!ft_issorted(pile_a->top))

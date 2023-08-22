@@ -10,12 +10,23 @@ LIB = libft/libft.a
 
 #          ----------========== {     SRCS     } ==========----------
 
-MANDATORY_SRCS =	errors.c \
+MANDATORY_SRCS =	chunks_pivots.c \
+					errors.c \
+					find_place.c \
 					ft_free.c \
+					ft_sort_three.c \
+					get_cheapest.c \
 					get_datas.c \
+					init_piles.c \
+					int_tab.c \
 					main.c \
+					movesa.c \
+					movesb.c \
+					movesab.c \
 					min_max.c \
+					push_all_b.c \
 					push_swap.c \
+					push_to_a.c \
 					utils.c
 
 BONUS_SRCS = 		exec_bonus.c \
@@ -52,7 +63,7 @@ bonus: $(BONUS_NAME)
 
 $(NAME): $(OBJS_DIR) $(OBJS)
 	@$(MAKE) -C libft --no-print-directory
-	@$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $@ -g
+	@$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $@ -g -fsanitize=address
 	@printf "\n$(GREEN)$(NAME) created!$(DEFAULT)\n"	
 
 $(BONUS_NAME): $(OBJS_BONUS_DIR) $(OBJS_BONUS)

@@ -28,6 +28,9 @@ typedef struct s_pile
 {
 	int		full_len;
 	int		actual_len;
+	int		*pre_sort;
+	int		nb_chunks;
+	int		*pivots;
 	t_stack	*top;
 }			t_pile;
 
@@ -54,14 +57,18 @@ void	ft_add_back(t_stack **stack, t_stack *stack_new);
 t_stack	*ft_stack_new(int content);
 
 
-void	ft_sort_b_till_3(t_pile *a, t_pile *b);
 int		*get_tab(t_pile *pile_a);
 void	ft_sort_int_tab(int *tab, int size);
-void	push_b(t_pile *a, t_pile *b, int *pivots, int nb_chunks);
-void	push_first_two_chunks(t_pile *a, t_pile *b, int *pivots, int chunk_size);
-void	push_chunk(t_pile *a, t_pile *b, int *pivots, int index, int chunk_size);
+int		define_chunks(int size);
+void	push_b(t_pile *a, t_pile *b);
+void	push_first_two_chunks(t_pile *a, t_pile *b, int chunk_size);
+void	push_chunk(t_pile *a, t_pile *b, int index, int chunk_size);
 int		*define_pivots(int *arr, int nb_chunks, int size);
 void	ft_sort_three(t_stack **a);
+t_pile	*init_pile_b(t_pile *pile_a);
+t_pile	*init_pile_a(int ac, char **av);
+int get_cheapest(t_pile *a, t_pile *b);
+void	push_a(t_pile *a, t_pile *b, t_stack *to_move);
 
 
 // get_datas.c
@@ -78,31 +85,9 @@ void	ft_free_all(t_pile *a, t_pile *b);
 void	push_swap(t_pile *pile_a, t_pile *pile_b);
 int		ft_issorted(t_stack *lst);
 
-//apply_rotations.c
-int		ft_apply_rarb(t_pile *a, t_pile *b, int nbr);
-int		ft_apply_rrarrb(t_pile *a, t_pile *b, int nbr);
-int		ft_apply_rarrb(t_pile *a, t_pile *b, int nbr);
-int		ft_apply_rrarb(t_pile *a, t_pile *b, int nbr);
-
 //min_max.c
 int		ft_max(t_stack *a);
 int		ft_min(t_stack *a);
-
-//determine_rotation.c
-int		find_best_rotation_atob(t_pile *a, t_pile *b);
-int		find_best_rotation_btoa(t_pile *a, t_pile *b);
-
-//rotate_utils_a_to_b.c
-int		ft_rarb(t_pile *a, t_pile *b, int c);
-int		ft_rrarrb(t_pile *a, t_pile *b, int c);
-int		ft_rrarb(t_pile *a, t_pile *b, int c);
-int		ft_rarrb(t_pile *a, t_pile *b, int c);
-
-//rotate_utils_b_to_a.c
-int		ft_rarb_a(t_pile *a, t_pile *b, int c);
-int		ft_rrarrb_a(t_pile *a, t_pile *b, int c);
-int		ft_rarrb_a(t_pile *a, t_pile *b, int c);
-int		ft_rrarb_a(t_pile *a, t_pile *b, int c);
 
 //find_place.c
 int		ft_find_index(t_stack *a, int nbr);
