@@ -40,11 +40,9 @@ t_stack	*ft_stack_new(int content)
 	new->nbr = content;
 	new->nb_rot_a = 0;
 	new->nb_rot_b = 0;
-	/* new->nb_rev_rot_a = 0;
-	new->nb_rev_rot_b = 0; */
 	new->total_moves = 0;
-	new->rev_b = 0;
-	new->rev_a = 0;
+	new->nb_rr = 0;
+	new->nb_rrr = 0;
 	new->next = NULL;
 	return (new);
 }

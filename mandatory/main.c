@@ -52,8 +52,8 @@ int main(int ac, char **av)
 	//print_stack(pile_a->top);
 	if (!ft_issorted(pile_a->top))
 		push_swap(pile_a, pile_b);
-	/* if (!ft_issorted(pile_a->top))
-		print_stack(pile_a->top); */
+	if (!ft_issorted(pile_a->top))
+		print_stack(pile_a->top);
 	//print_stack(pile_a->top);
 	ft_free_stack(&(pile_a->top));
 	free(pile_a);

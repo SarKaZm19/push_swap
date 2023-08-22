@@ -198,6 +198,7 @@ void	ft_sort_b_till_3(t_pile *a, t_pile *b)
 				break ;
 			tmp = tmp->next;
 		}
+	
 		// printf("tmp->nbr = %d\n", tmp->nbr);
 		// print_stack(a->top);
 		// print_stack(b->top);

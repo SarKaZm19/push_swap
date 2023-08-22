@@ -1,65 +1,63 @@
 #include "push_swap.h"
 
-void	ft_pa(t_pile *a, t_pile *b, int j)
+void	ft_pa(t_stack **a, t_stack **b, int j)
 {
 	t_stack	*tmp;
 
-	if (!(b->top))
+	if (!(*b))
 		return ;
-	tmp = a->top;
-	a->top = b->top;
-	b->top = b->top->next;
-	a->top->next = tmp;
-	b->actual_len--;
-	a->actual_len++;
+	tmp = *a;
+	*a = *b;
+	*b = (*b)->next;
+	(*a)->next = tmp;
 	if (j == 0)
 		write(1, "pa\n", 3);
 }
 
-void	ft_sa(t_pile *a, int j)
+void	ft_sa(t_stack **a, int j)
 {
 	t_stack	*tmp;
 
-	if (!(a->top) || !(a->top->next))
+	if (!(*a) || !((*a)->next))
 		return ;
-	tmp = a->top;
-	a->top = a->top->next;
-	tmp->next = a->top->next;
-	a->top->next = tmp;
+	tmp = *a;
+	*a = (*a)->next;
+	tmp->next = (*a)->next;
+	(*a)->next = tmp;
 	if (j == 0)//seulement pour le checker
 		write(1, "sa\n", 3);
 }
 
-void	ft_ra(t_pile *a, int j)
+void	ft_ra(t_stack **a, int j)
 {
 	t_stack	*tmp;
 
-	if (!(a->top) || !(a->top->next))
+	if (!(*a) || !(*a)->next)
 		return ;
-	tmp = a->top;
-	a->top = ft_lstlast(a->top);
-	a->top->next = tmp;
-	a->top = tmp->next;
+	tmp = *a;
+	*a = ft_lstlast(*a);
+	(*a)->next = tmp;
+	*a = tmp->next;
 	tmp->next = NULL;
 	if (j == 0) //seulement pour le checker
 		write(1, "ra\n", 3);
 }
 
-void	ft_rra(t_pile *a, int j)
+void	ft_rra(t_stack **a, int j)
 {
 	t_stack	*tmp;
 	int		i;
 
-	if (!(a->top) || !(a->top->next))
+	if (!(*a) || !((*a)->next))
 		return ;
 	i = 0;
-	tmp = a->top;
-	while (a->top->next)
+	tmp = *a;
+	while ((*a)->next)
 	{
-		a->top = a->top->next;
+		*a = (*a)->next;
 		i++;
 	}
-	a->top->next = tmp;
+	(*a)->next = tmp;
 	while (i > 1)
 	{
 		tmp = tmp->next;
