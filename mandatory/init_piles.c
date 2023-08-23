@@ -18,7 +18,9 @@ t_pile	*init_pile_a(int ac, char **av)
 	ft_sort_int_tab(pile_a->pre_sort, pile_a->full_len);
 	pile_a->nb_chunks = define_chunks(pile_a->full_len);
 	if (pile_a->nb_chunks > 1)
-		pile_a->pivots = define_pivots(pile_a->pre_sort, pile_a->nb_chunks, pile_a->full_len);
+	{
+		pile_a->pivots = define_pivots(pile_a->pre_sort, pile_a->nb_chunks, pile_a->full_len, pile_a->chunk_size);
+	}
 	return (pile_a);
 }
 
@@ -35,5 +37,7 @@ t_pile	*init_pile_b(t_pile *pile_a)
 	pile_b->nb_chunks = pile_a->nb_chunks;
 	pile_b->pre_sort = pile_a->pre_sort;
 	pile_b->pivots = pile_a->pivots;
+	pile_b->chunk_size[0] = pile_a->chunk_size[0];
+	pile_b->chunk_size[1] = pile_a->chunk_size[1];
 	return (pile_b);
 }

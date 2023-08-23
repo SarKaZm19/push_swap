@@ -28,9 +28,10 @@ typedef struct s_pile
 {
 	int		full_len;
 	int		actual_len;
-	int		*pre_sort;
 	int		nb_chunks;
+	int		chunk_size[2];
 	int		*pivots;
+	int		*pre_sort;
 	t_stack	*top;
 }			t_pile;
 
@@ -61,13 +62,13 @@ int		*get_tab(t_pile *pile_a);
 void	ft_sort_int_tab(int *tab, int size);
 int		define_chunks(int size);
 void	push_b(t_pile *a, t_pile *b);
-void	push_first_two_chunks(t_pile *a, t_pile *b, int chunk_size);
-void	push_chunk(t_pile *a, t_pile *b, int index, int chunk_size);
-int		*define_pivots(int *arr, int nb_chunks, int size);
+void	push_first_two_chunks(t_pile *a, t_pile *b);
+void	push_chunk(t_pile *a, t_pile *b, int index);
+int		*define_pivots(int *arr, int nb_chunks, int size, int *chunk_size);
 void	ft_sort_three(t_stack **a);
 t_pile	*init_pile_b(t_pile *pile_a);
 t_pile	*init_pile_a(int ac, char **av);
-int get_cheapest(t_pile *a, t_pile *b);
+int get_cheapest(t_pile *a, t_pile *b, int index);
 void	push_a(t_pile *a, t_pile *b, t_stack *to_move);
 
 

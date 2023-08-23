@@ -15,7 +15,7 @@ int		define_chunks(int size)
 	return (nb_chunks);
 }
 
-int	*define_pivots(int *arr, int nb_chunks, int size)
+int	*define_pivots(int *arr, int nb_chunks, int size, int *chunk_size)
 {
 	int	*pivots;
 	int	i;
@@ -30,12 +30,14 @@ int	*define_pivots(int *arr, int nb_chunks, int size)
 	i = 2;
 	pivots[0] = arr[base_pivot];
 	pivots[1] = arr[base_pivot * 2];
+	chunk_size[0] = base_pivot;
 	while (i < (nb_chunks * 2) - 2)
 	{
 		if (i == (nb_chunks * 2) - 4)
 		{
 			pivots[i] = arr[size - (base_pivot / 2)];
 			pivots[i + 1] = arr[size - 1];
+			chunk_size[1] = size - (base_pivot * (j - 1));
 			i += 2;
 		}
 		else if (i % 2 == 1)

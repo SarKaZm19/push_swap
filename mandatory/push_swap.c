@@ -31,6 +31,8 @@ void	push_swap(t_pile *a, t_pile *b)
 {
 	t_stack	*to_move;
 	int		nb_push;
+	int		i;
+	int		c_size;
 
 	b->top = NULL;
 	if (a->full_len == 2)
@@ -54,11 +56,13 @@ void	push_swap(t_pile *a, t_pile *b)
 		print_stack(a->top);
 		printf("b>>>\n");
 		print_stack(b->top); */
-		//i = nb_chunks * 2 - 4;
+		i = a->nb_chunks * 2 - 4;
+		print_stack(a->top);
+		c_size = (a->chunk_size[1] / 2) - a->actual_len - (a->chunk_size[0] - a->chunk_size[1]);
 		while (b->actual_len != 0)
 		{
-			//chunk_size = a->full_len / nb_chunks;
-			nb_push = get_cheapest(a, b); // faire cheapest from chunk ;)
+			nb_push = get_cheapest(a, b, i); // faire cheapest from chunk ;)
+			fprintf(stderr, "nb_push = %d\n", nb_push);
 			to_move = b->top;
 			while (to_move)
 			{
@@ -67,7 +71,18 @@ void	push_swap(t_pile *a, t_pile *b)
 				to_move = to_move->next;
 			}
 			push_a(a, b, to_move);
-		}
+			printf("c_size = %d\n", c_size);
+			printf("i = %d\n", i);
+			c_size--;
+			if (c_size <= 0)
+			{
+				i -= 2;
+				if (i >= 0)
+					c_size = a->chunk_size[1];
+				else
+					c_size = a->chunk_size[0] - 1;	
+			}
+		} 
 		/* printf("len_a = %d, len_b = %d\n", a->actual_len, b->actual_len);
 		printf("a>>>\n");
 		print_stack(a->top);

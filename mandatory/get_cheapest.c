@@ -71,27 +71,34 @@ static void	get_total_moves(t_stack *tmp)
 	}
 }
 
-int get_cheapest(t_pile *a, t_pile *b)
+int get_cheapest(t_pile *a, t_pile *b, int index_chunk)
 {
 	int		cheapest_moves;
-	int		index;
+	int		index_tmp;
 	int		nb_push;
 	t_stack	*tmp;
 
+	printf("coucou\n");
 	cheapest_moves = a->full_len;
-	index = 0;
+	index_tmp = 0;
 	tmp = b->top;
+	nb_push = tmp->nbr;
 	while (tmp)
 	{
-		get_nb_rot_a(tmp, a->top, a->actual_len);
-		get_nb_rot_b(tmp, b->actual_len, index);
-		get_total_moves(tmp);
-		if (cheapest_moves > tmp->total_moves)
+
+		if (index_chunk == -2 || (tmp->nbr <= a->pivots[index_chunk + 1] && tmp->nbr > a->pivots[index_chunk]))
 		{
-			cheapest_moves = tmp->total_moves;
-			nb_push = tmp->nbr;
+			get_nb_rot_a(tmp, a->top, a->actual_len);
+			get_nb_rot_b(tmp, b->actual_len, index_tmp);
+			get_total_moves(tmp);
+			if (cheapest_moves > tmp->total_moves)
+			{
+				printf("tmp->nbr = %d\n", tmp->nbr);
+				cheapest_moves = tmp->total_moves;
+				nb_push = tmp->nbr;
+			}
 		}
-		index++;
+		index_tmp++;
 		tmp = tmp->next;
 	}
 	return (nb_push);
