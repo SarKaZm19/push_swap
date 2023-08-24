@@ -13,7 +13,7 @@ void	print_stack(t_stack *lst)
 
 	while (lst)
 	{
-		printf("lst->content = %d\n", lst->nbr);
+		printf("lst->content %d\n", lst->nbr);
 		lst = lst->next;
 	}
 }

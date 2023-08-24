@@ -28,7 +28,7 @@ void	push_chunk(t_pile *a, t_pile *b, int index)
 	i = 0;
 	while (i < a->chunk_size[1] && !ft_issorted(a->top) && a->actual_len > 3)
 	{
-		if (a->top->nbr <= a->pivots[index + 1])
+		if (a->top->nbr <= a->pivots[index + 1] && a->top->nbr < a->pre_sort[a->full_len - 3])
 		{
 			ft_pb(&(a->top), &(b->top), 0);
 			if (b->top->nbr <= a->pivots[index])

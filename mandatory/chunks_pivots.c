@@ -15,42 +15,40 @@ int		define_chunks(int size)
 	return (nb_chunks);
 }
 
-int	*define_pivots(int *arr, int nb_chunks, int size, int *chunk_size)
+void	define_pivots(t_pile *pile)
 {
-	int	*pivots;
-	int	i;
 	int	base_pivot;
+	int	i;
 	int	j;
 
-	pivots = malloc(sizeof(int) * ((nb_chunks * 2) - 2));
-	if (!pivots)
-		return (NULL);
-	base_pivot = (size / nb_chunks);
+	pile->pivots = malloc(sizeof(int) * ((pile->nb_chunks * 2) - 2));
+	if (!pile->pivots)
+		return ;
+	base_pivot = (pile->full_len / pile->nb_chunks);
 	j = 3;
 	i = 2;
-	pivots[0] = arr[base_pivot];
-	pivots[1] = arr[base_pivot * 2];
-	chunk_size[0] = base_pivot;
-	while (i < (nb_chunks * 2) - 2)
+	pile->pivots[0] = pile->pre_sort[base_pivot];
+	pile->pivots[1] = pile->pre_sort[base_pivot * 2];
+	pile->chunk_size[0] = base_pivot;
+	while (i < (pile->nb_chunks * 2) - 2)
 	{
-		if (i == (nb_chunks * 2) - 4)
+		if (i == (pile->nb_chunks * 2) - 4)
 		{
-			pivots[i] = arr[size - (base_pivot / 2)];
-			pivots[i + 1] = arr[size - 1];
-			chunk_size[1] = size - (base_pivot * (j - 1));
+			pile->pivots[i] = pile->pre_sort[pile->full_len - (base_pivot / 2)];
+			pile->pivots[i + 1] = pile->pre_sort[pile->full_len - 1];
+			pile->chunk_size[1] = pile->full_len - (base_pivot * (j - 1));
 			i += 2;
 		}
 		else if (i % 2 == 1)
 		{
-			pivots[i] = arr[(base_pivot * j)];
+			pile->pivots[i] = pile->pre_sort[(base_pivot * j)];
 			i++;
 			j++;
 		}
 		else if (i % 2 == 0)
 		{
-			pivots[i] = arr[(base_pivot * j) - (base_pivot / 2)];
+			pile->pivots[i] = pile->pre_sort[(base_pivot * j) - (base_pivot / 2)];
 			i++;
 		}
 	}
-	return (pivots);
 }

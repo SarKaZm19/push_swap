@@ -78,7 +78,6 @@ int get_cheapest(t_pile *a, t_pile *b, int index_chunk)
 	int		nb_push;
 	t_stack	*tmp;
 
-	printf("coucou\n");
 	cheapest_moves = a->full_len;
 	index_tmp = 0;
 	tmp = b->top;
@@ -86,14 +85,13 @@ int get_cheapest(t_pile *a, t_pile *b, int index_chunk)
 	while (tmp)
 	{
 
-		if (index_chunk == -2 || (tmp->nbr <= a->pivots[index_chunk + 1] && tmp->nbr > a->pivots[index_chunk]))
+		if (index_chunk == -1 || (tmp->nbr <= a->pivots[index_chunk + 1] && tmp->nbr > a->pivots[index_chunk]))
 		{
 			get_nb_rot_a(tmp, a->top, a->actual_len);
 			get_nb_rot_b(tmp, b->actual_len, index_tmp);
 			get_total_moves(tmp);
 			if (cheapest_moves > tmp->total_moves)
 			{
-				printf("tmp->nbr = %d\n", tmp->nbr);
 				cheapest_moves = tmp->total_moves;
 				nb_push = tmp->nbr;
 			}

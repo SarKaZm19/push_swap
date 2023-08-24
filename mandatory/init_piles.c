@@ -19,7 +19,7 @@ t_pile	*init_pile_a(int ac, char **av)
 	pile_a->nb_chunks = define_chunks(pile_a->full_len);
 	if (pile_a->nb_chunks > 1)
 	{
-		pile_a->pivots = define_pivots(pile_a->pre_sort, pile_a->nb_chunks, pile_a->full_len, pile_a->chunk_size);
+		define_pivots(pile_a);
 	}
 	return (pile_a);
 }
