@@ -13,7 +13,7 @@ void	print_stack(t_stack *lst)
 
 	while (lst)
 	{
-		printf("lst->content %d\n", lst->nbr);
+		printf("lst->content = %d\n", lst->nbr);
 		lst = lst->next;
 	}
 }
@@ -33,21 +33,18 @@ int	ft_issorted(t_stack *lst)
 
 void	print_info(t_pile *a)
 {
-	printf("a->full_len = %d\n", a->full_len);
 	printf("a->actual_len = %d\n", a->actual_len);
+	printf("a->full_len = %d\n", a->full_len);
 	printf("a->nb_chunks = %d\n", a->nb_chunks);
-	printf("size_2_first_chunks = %d\n", a->chunk_size[0]);
-	printf("size_last_chunks = %d\n", a->chunk_size[1]);
 	int i = -1;
 	if (a->nb_chunks > 1)
 	{
 		while (++i < a->nb_chunks * 2 - 2)
 			printf("pivots[%d] = %d\n", i, a->pivots[i]);
 	}
-	/* i = -1;
+	i = -1;
 	while (++i < a->full_len)
-		printf("arr[%d] = %d\n", i, a->pre_sort[i]); */
-	//print_stack(a->top);
+		printf("arr[%d] = %d\n", i, a->pre_sort[i]);
 }
 
 int main(int ac, char **av)
@@ -59,13 +56,13 @@ int main(int ac, char **av)
 	//print_info(pile_a);
 	pile_b = init_pile_b(pile_a);
 	//print_info(pile_b);
-	if (!pile_a || !pile_b)
-		return (1);
 	if (!ft_issorted(pile_a->top))
 		push_swap(pile_a, pile_b);
 	if (!ft_issorted(pile_a->top))
-		print_stack(pile_a->top); 
+		print_stack(pile_a->top);
 	//print_stack(pile_a->top);
+	free(pile_a->pivots);
+	free(pile_a->pre_sort);
 	ft_free_stack(&(pile_a->top));
 	free(pile_a);
 	free(pile_b);

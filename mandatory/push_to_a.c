@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void	push_a(t_pile *a, t_pile *b, t_stack *to_move)
+static void	do_sync_rot(t_pile *a, t_pile *b, t_stack *to_move)
 {
 	while (to_move->nb_rr > 0)
 	{
@@ -12,6 +12,10 @@ void	push_a(t_pile *a, t_pile *b, t_stack *to_move)
 		ft_rrr(&(a->top), &(b->top), 0);
 		to_move->nb_rrr--;
 	}
+}
+
+static void	do_rot_a(t_pile *a, t_stack *to_move)
+{
 	if (to_move->rev_a)
 	{
 		while (to_move->nb_rot_a > 0)
@@ -28,6 +32,10 @@ void	push_a(t_pile *a, t_pile *b, t_stack *to_move)
 			to_move->nb_rot_a--;
 		}
 	}
+}
+
+static void	do_rot_b(t_pile *b, t_stack *to_move)
+{
 	if (to_move->rev_b)
 	{
 		while (to_move->nb_rot_b > 0)
@@ -44,7 +52,36 @@ void	push_a(t_pile *a, t_pile *b, t_stack *to_move)
 			to_move->nb_rot_b--;
 		}
 	}
+}
+
+static void	rotate_push_a(t_pile *a, t_pile *b, t_stack *to_move)
+{
+	do_sync_rot(a, b, to_move);
+	do_rot_a(a, to_move);
+	do_rot_b(b, to_move);
 	ft_pa(&(a->top), &(b->top), 0);
 	a->actual_len++;
 	b->actual_len--;
 }
+
+void	push_a(t_pile *a, t_pile *b)
+{
+	t_stack	*to_move;
+	int		nb_push;
+
+	while (b->actual_len != 0)
+	{
+		//chunk_size = a->full_len / nb_chunks;
+		nb_push = get_cheapest(a, b);
+		to_move = b->top;
+		while (to_move)
+		{
+			if (to_move->nbr == nb_push)
+				break ;
+			to_move = to_move->next;
+		}
+		rotate_push_a(a, b, to_move);
+	}
+}
+
+

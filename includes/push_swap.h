@@ -28,10 +28,9 @@ typedef struct s_pile
 {
 	int		full_len;
 	int		actual_len;
-	int		nb_chunks;
-	int		chunk_size[2];
-	int		*pivots;
 	int		*pre_sort;
+	int		nb_chunks;
+	int		*pivots;
 	t_stack	*top;
 }			t_pile;
 
@@ -61,16 +60,19 @@ t_stack	*ft_stack_new(int content);
 int		*get_tab(t_pile *pile_a);
 void	ft_sort_int_tab(int *tab, int size);
 int		define_chunks(int size);
+void	push_one_chunk(t_pile *a, t_pile *b);
 void	push_b(t_pile *a, t_pile *b);
-void	push_first_two_chunks(t_pile *a, t_pile *b);
-void	push_chunk(t_pile *a, t_pile *b, int index);
-void	define_pivots(t_pile *pile);
+void	push_first_two_chunks(t_pile *a, t_pile *b, int chunk_size);
+void	push_chunk(t_pile *a, t_pile *b, int index, int chunk_size);
+int		*set_pivots(int *arr, int nb_chunks, int size);
 void	ft_sort_three(t_stack **a);
 t_pile	*init_pile_b(t_pile *pile_a);
 t_pile	*init_pile_a(int ac, char **av);
-int get_cheapest(t_pile *a, t_pile *b, int index);
-void	push_a(t_pile *a, t_pile *b, t_stack *to_move);
-void	print_info(t_pile *pile);
+int 	get_cheapest(t_pile *a, t_pile *b);
+void	push_a(t_pile *a, t_pile *b);
+void	get_nb_rot_b(t_stack *tmp, int len, int index);
+void	get_nb_rot_a(t_stack *tmp, t_stack *a, int len);
+void	get_total_moves(t_stack *tmp);
 
 
 // get_datas.c
@@ -93,7 +95,6 @@ int		ft_min(t_stack *a);
 
 //find_place.c
 int		ft_find_index(t_stack *a, int nbr);
-int		ft_find_place_b(t_stack *stack_b, int nbr_push);
 int		ft_find_place_a(t_stack *stack_a, int nbr_push);
 
 //misc

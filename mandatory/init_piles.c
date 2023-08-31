@@ -6,7 +6,7 @@ t_pile	*init_pile_a(int ac, char **av)
 
 	pile_a = malloc(sizeof(t_pile));
 	if (!pile_a)
-		return (NULL);
+		return (prog_error(), NULL);
 	pile_a->top = get_av(ac, av);
 	if (!pile_a->top)
 		return (free(pile_a), prog_error(), NULL);
@@ -17,10 +17,9 @@ t_pile	*init_pile_a(int ac, char **av)
 		return (ft_free_stack(&(pile_a->top)), free(pile_a), prog_error(), NULL);
 	ft_sort_int_tab(pile_a->pre_sort, pile_a->full_len);
 	pile_a->nb_chunks = define_chunks(pile_a->full_len);
-	if (pile_a->nb_chunks > 1)
-	{
-		define_pivots(pile_a);
-	}
+	pile_a->pivots = set_pivots(pile_a->pre_sort, pile_a->nb_chunks, pile_a->full_len);
+	if (!pile_a->pivots)
+		return (ft_free_stack(&(pile_a->top)), free(pile_a), prog_error(), NULL);
 	return (pile_a);
 }
 
@@ -30,14 +29,12 @@ t_pile	*init_pile_b(t_pile *pile_a)
 
 	pile_b = malloc(sizeof(t_pile));
 	if (!pile_b)
-		return (ft_free_stack(&(pile_a->top)), free(pile_a), NULL);
+		return (ft_free_stack(&(pile_a->top)), free(pile_a), prog_error(), NULL);
 	pile_b->top = NULL;
 	pile_b->full_len = 0;
 	pile_b->actual_len = 0;
 	pile_b->nb_chunks = pile_a->nb_chunks;
 	pile_b->pre_sort = pile_a->pre_sort;
 	pile_b->pivots = pile_a->pivots;
-	pile_b->chunk_size[0] = pile_a->chunk_size[0];
-	pile_b->chunk_size[1] = pile_a->chunk_size[1];
 	return (pile_b);
 }

@@ -53,7 +53,7 @@ t_stack	*get_av(int ac, char **av)
 	{
 		data_set = ft_split(av[1], ' ');
 		if (!data_set)
-			ft_malloc_error("ft_split: ");
+			return (NULL);
 		a = get_nbs(data_set);
 		ft_free_tab(data_set);
 	}

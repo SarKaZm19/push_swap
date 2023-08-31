@@ -24,7 +24,7 @@ void	ft_sa(t_stack **a, int j)
 	*a = (*a)->next;
 	tmp->next = (*a)->next;
 	(*a)->next = tmp;
-	if (j == 0)//seulement pour le checker
+	if (j == 0)
 		write(1, "sa\n", 3);
 }
 
@@ -39,7 +39,7 @@ void	ft_ra(t_stack **a, int j)
 	(*a)->next = tmp;
 	*a = tmp->next;
 	tmp->next = NULL;
-	if (j == 0) //seulement pour le checker
+	if (j == 0)
 		write(1, "ra\n", 3);
 }
 
@@ -64,6 +64,6 @@ void	ft_rra(t_stack **a, int j)
 		i--;
 	}
 	tmp->next = NULL;
-	if (j == 0)//seulement pour le checker
+	if (j == 0)
 		write(1, "rra\n", 4);
 }
