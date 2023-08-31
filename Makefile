@@ -15,6 +15,7 @@ MANDATORY_SRCS =	chunks_pivots.c \
 					find_place.c \
 					ft_free.c \
 					ft_sort_three.c \
+					get_cheapest_rot.c \
 					get_cheapest.c \
 					get_datas.c \
 					init_piles.c \
@@ -63,7 +64,7 @@ bonus: $(BONUS_NAME)
 
 $(NAME): $(OBJS_DIR) $(OBJS)
 	@$(MAKE) -C libft --no-print-directory
-	@$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $@ -g -fsanitize=address
+	@$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $@
 	@printf "\n$(GREEN)$(NAME) created!$(DEFAULT)\n"	
 
 $(BONUS_NAME): $(OBJS_BONUS_DIR) $(OBJS_BONUS)
