@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 int	ft_lstsize(t_stack *lst)
 {
@@ -34,7 +34,7 @@ t_stack	*ft_stack_new(int content)
 {
 	t_stack	*new;
 
-	new = malloc(sizeof (t_stack));
+	new = malloc(sizeof(t_stack));
 	if (!new)
 		return (NULL);
 	new->nbr = content;

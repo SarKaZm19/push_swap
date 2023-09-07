@@ -47,11 +47,9 @@ void	push_chunk(t_pile *a, t_pile *b, int index, int chunk_size)
 void	push_one_chunk(t_pile *a, t_pile *b)
 {
 	int	i;
-	int	chunk_size;
 
 	i = 0;
-	chunk_size = a->full_len / 2;
-	while (i < chunk_size && !ft_issorted(a->top) && a->actual_len > 3)
+	while (!ft_issorted(a->top) && a->actual_len > 3)
 	{
 		if (a->top->nbr <= a->pre_sort[a->full_len - 1])
 		{

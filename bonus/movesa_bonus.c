@@ -1,10 +1,10 @@
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 void	ft_pa(t_stack **a, t_stack **b)
 {
 	t_stack	*tmp;
 
-	if (!*b)
+	if (!(*b))
 		return ;
 	tmp = *a;
 	*a = *b;
@@ -16,7 +16,7 @@ void	ft_sa(t_stack **a)
 {
 	t_stack	*tmp;
 
-	if (!*a || !((*a)->next))
+	if (!(*a) || !((*a)->next))
 		return ;
 	tmp = *a;
 	*a = (*a)->next;
@@ -28,7 +28,7 @@ void	ft_ra(t_stack **a)
 {
 	t_stack	*tmp;
 
-	if (!*a || !(*a)->next)
+	if (!(*a) || !(*a)->next)
 		return ;
 	tmp = *a;
 	*a = ft_lstlast(*a);
@@ -42,7 +42,7 @@ void	ft_rra(t_stack **a)
 	t_stack	*tmp;
 	int		i;
 
-	if (!*a || !(*a)->next)
+	if (!(*a) || !((*a)->next))
 		return ;
 	i = 0;
 	tmp = *a;

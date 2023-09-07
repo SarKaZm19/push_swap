@@ -45,6 +45,7 @@ void	print_info(t_pile *a)
 	i = -1;
 	while (++i < a->full_len)
 		printf("arr[%d] = %d\n", i, a->pre_sort[i]);
+	print_stack(a->top);
 }
 
 int main(int ac, char **av)

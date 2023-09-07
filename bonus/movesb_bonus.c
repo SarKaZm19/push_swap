@@ -1,22 +1,22 @@
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
-void	ft_pb(t_stack **stack_a, t_stack **stack_b)
+void	ft_pb(t_stack **a, t_stack **b)
 {
 	t_stack	*tmp;
 
-	if (!*stack_a)
+	if (!(*a))
 		return ;
-	tmp = *stack_b;
-	*stack_b = *stack_a;
-	*stack_a = (*stack_a)->next;
-	(*stack_b)->next = tmp;
+	tmp = *b;
+	*b = *a;
+	*a = (*a)->next;
+	(*b)->next = tmp;
 }
 
 void	ft_sb(t_stack **b)
 {
 	t_stack	*tmp;
 
-	if (!*b || !((*b)->next))
+	if (!(*b) || !((*b)->next))
 		return ;
 	tmp = *b;
 	*b = (*b)->next;
@@ -28,12 +28,12 @@ void	ft_rb(t_stack **b)
 {
 	t_stack	*tmp;
 
-	if (!*b || !(*b)->next)
+	if (!(*b) || !(*b)->next)
 		return ;
 	tmp = *b;
 	*b = ft_lstlast(*b);
 	(*b)->next = tmp;
-	*b = tmp->next;
+	(*b) = tmp->next;
 	tmp->next = NULL;
 }
 
@@ -42,7 +42,7 @@ void	ft_rrb(t_stack **b)
 	t_stack	*tmp;
 	int		i;
 
-	if (!*b || !(*b)->next)
+	if (!(*b) || !((*b)->next))
 		return ;
 	i = 0;
 	tmp = *b;

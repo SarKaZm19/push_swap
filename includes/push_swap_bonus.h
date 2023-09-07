@@ -19,7 +19,6 @@ typedef struct s_stack
 
 // Parsing
 t_stack	*get_av(int ac, char **av);
-void	check_duplicates(t_stack *lst);
 int ft_atoi2(char *str, int *error_flag);
 
 // Checker
@@ -47,5 +46,6 @@ t_stack	*ft_stack_new(int content);
 //ft_free.c
 void	ft_free_stack(t_stack **a);
 
+void	print_stack(t_stack *lst);
 
 #endif
