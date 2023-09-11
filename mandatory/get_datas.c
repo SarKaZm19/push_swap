@@ -1,21 +1,5 @@
 #include "push_swap.h"
 
-static int	check_duplicates(char **datas, int st)
-{
-	int	i;
-
-	i = st + 1;
-	while (datas[i])
-	{
-		if (!ft_strcmp(datas[st], datas[i]))
-			break ;
-		i++;
-	}
-	if (!datas[i])
-		return (1);
-	return (0);
-}
-
 static t_stack	*check_args(char **datas)
 {
 	int	i;
@@ -29,8 +13,8 @@ static t_stack	*check_args(char **datas)
 	i = -1;
 	while (datas[++i])
 	{
-		if (!check_duplicates(datas, i))
-			return (NULL);
+		if (!*datas[i])
+			return (ft_free_stack(&a), NULL);
 		nb = ft_atoi2(datas[i], &error_flag);
 		if (error_flag == -1)
 			return (ft_free_stack(&a), NULL);

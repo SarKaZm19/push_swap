@@ -1,18 +1,23 @@
 #include "push_swap_bonus.h"
 
-static int	check_duplicates(char **datas, int st)
+static int	check_duplicates(t_stack *a)
 {
-	int	i;
+	t_stack	*tmp;
+	t_stack	*mem;
 
-	i = st + 1;
-	while (datas[i])
+	tmp = a;
+
+	while (tmp)
 	{
-		if (!ft_strcmp(datas[st], datas[i]))
-			break ;
-		i++;
+		mem = tmp->next;
+		while (mem)
+		{
+			if (tmp->nbr == mem->nbr)
+				return (1);
+			mem = mem->next;
+		}
+		tmp = tmp->next;
 	}
-	if (!datas[i])
-		return (1);
 	return (0);
 }
 
@@ -29,8 +34,8 @@ static t_stack	*check_args(char **datas)
 	i = -1;
 	while (datas[++i])
 	{
-		if (!check_duplicates(datas, i))
-			return (NULL);
+		if (!*datas[i])
+			return (ft_free_stack(&a), NULL);
 		nb = ft_atoi2(datas[i], &error_flag);
 		if (error_flag == -1)
 			return (ft_free_stack(&a), NULL);
@@ -39,6 +44,8 @@ static t_stack	*check_args(char **datas)
 			return (ft_free_stack(&a), NULL);
 		ft_add_back(&a, new_node);
 	}
+	if (check_duplicates(a))
+		return (ft_free_stack(&a), NULL);
 	return (a);
 }
 

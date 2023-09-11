@@ -48,6 +48,13 @@ void	print_info(t_pile *a)
 	print_stack(a->top);
 }
 
+void	print_stupid(void)
+{
+	int i = -1;
+	while (++i < 10000)
+		printf("pasok\n");
+}
+
 int main(int ac, char **av)
 {
 	t_pile	*pile_a;
@@ -60,7 +67,10 @@ int main(int ac, char **av)
 	if (!ft_issorted(pile_a->top))
 		push_swap(pile_a, pile_b);
 	if (!ft_issorted(pile_a->top))
+	{
 		print_stack(pile_a->top);
+		//print_stupid();
+	}
 	//print_stack(pile_a->top);
 	free(pile_a->pivots);
 	free(pile_a->pre_sort);

@@ -63,7 +63,7 @@ int main(int ac, char **av)
 
 	a = get_av(ac, av);
 	if (!a)
-		return (ft_free_stack(&a), 1);
+		return (ft_free_stack(&a), prog_error(), 1);
 	b = NULL;
 	gnl_loop(&a, &b);
 	if (!ft_issorted(a) || b)

@@ -47,5 +47,6 @@ t_stack	*ft_stack_new(int content);
 void	ft_free_stack(t_stack **a);
 
 void	print_stack(t_stack *lst);
+void	prog_error();
 
 #endif

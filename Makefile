@@ -30,7 +30,8 @@ MANDATORY_SRCS =	chunks_pivots.c \
 					push_to_a.c \
 					utils.c
 
-BONUS_SRCS = 		exec_bonus.c \
+BONUS_SRCS = 		errors_bonus.c \
+					exec_bonus.c \
 					get_datas_bonus.c \
 					main_bonus.c \
 					movesa_bonus.c \
@@ -88,15 +89,15 @@ $(OBJS_BONUS_DIR):
 
 clean:
 	@$(MAKE) -C libft clean --no-print-directory
-	@$(RMF) $(OBJS)
-	@$(RMD) $(OBJS_DIR)
+	@$(RMF) $(OBJS) $(OBJS_BONUS)
+	@$(RMD) $(OBJS_DIR) $(OBJS_BONUS_DIR)
 	@printf "$(YELLOW)object files for push_swap deleted!$(DEFAULT)\n"
 
 
 fclean: 
 	@$(MAKE) clean --no-print-directory
 	@$(MAKE) -C libft fclean --no-print-directory
-	@$(RMF) $(NAME)
+	@$(RMF) $(NAME) $(BONUS_NAME)
 	@printf "$(RED)$(NAME) deleted!$(DEFAULT)\n"
 
 re: 

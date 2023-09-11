@@ -25,6 +25,6 @@ int	exec_line(char *line, t_stack **a, t_stack **b)
 	else if (!ft_strcmp(line, "rrr\n"))
 		ft_rrr(a, b);
 	else
-		return(ft_putendl_fd("KO", 1), 1);
+		return(ft_putendl_fd("Error", 1), 1);
 	return (0);
 }
