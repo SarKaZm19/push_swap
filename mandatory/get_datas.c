@@ -1,5 +1,22 @@
 #include "push_swap.h"
 
+int	check_duplicates(int *datas, int len)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < len - 1)
+	{
+		j = i;
+		while (++j < len)
+			if (datas[i] == datas[j])
+				return(1);
+		i++;
+	}
+	return (0);
+}
+
 static t_stack	*check_args(char **datas)
 {
 	int	i;

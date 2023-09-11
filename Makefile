@@ -14,7 +14,6 @@ MANDATORY_SRCS =	chunks_pivots.c \
 					errors.c \
 					find_place.c \
 					ft_free.c \
-					ft_sort_three.c \
 					get_cheapest_rot.c \
 					get_cheapest.c \
 					get_datas.c \
@@ -28,10 +27,13 @@ MANDATORY_SRCS =	chunks_pivots.c \
 					push_all_b.c \
 					push_swap.c \
 					push_to_a.c \
+					sort_three.c \
 					utils.c
 
-BONUS_SRCS = 		errors_bonus.c \
+BONUS_SRCS = 		checker_gnl_bonus.c \
+					errors_bonus.c \
 					exec_bonus.c \
+					ft_free_bonus.c \
 					get_datas_bonus.c \
 					main_bonus.c \
 					movesa_bonus.c \

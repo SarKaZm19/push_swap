@@ -83,6 +83,10 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+t_list	*ft_lstnew(void *content);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+t_list	*ft_lstlast(t_list *lst);
+
 // Free
 void	ft_free_str(char *content);
 void	ft_free_tab(char **tab);
@@ -91,12 +95,6 @@ void	ft_free_tab(char **tab);
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 32
 # endif
-
-// GNL
-char	*get_next_line(int fd);
-ssize_t	ft_get_index(char *str);
-void	ft_get_save(char *save, char *line, size_t start);
-char	*ft_get_ret_line(char *line, size_t nl_index);
 
 // Ft_printf
 typedef void	(*t_tabf)(va_list, size_t *);

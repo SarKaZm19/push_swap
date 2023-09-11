@@ -1,12 +1,5 @@
 #include "push_swap.h"
 
-// args peut être 1 2 3 4 ou "1 2 3 4" ou "1 2" 3 "4 5"
-// --> pour chaque av, split ?
-
-// 1) --> récup tous les av dans un tab de char
-// 2) --> check chaque elem du tab pour tab de int
-// 3) --> verifier les doublons et autres
-
 void	print_stack(t_stack *lst)
 {
 	printf("stack : \n");
@@ -28,8 +21,6 @@ int	ft_issorted(t_stack *lst)
 	}
 	return (1);
 }
-
-//int COUNT_OPERATIONS;
 
 void	print_info(t_pile *a)
 {
@@ -66,17 +57,13 @@ int main(int ac, char **av)
 	//print_info(pile_b);
 	if (!ft_issorted(pile_a->top))
 		push_swap(pile_a, pile_b);
-	if (!ft_issorted(pile_a->top))
+	/* if (!ft_issorted(pile_a->top))
 	{
 		print_stack(pile_a->top);
-		//print_stupid();
-	}
+		print_stupid();
+	} */
 	//print_stack(pile_a->top);
-	free(pile_a->pivots);
-	free(pile_a->pre_sort);
-	ft_free_stack(&(pile_a->top));
-	free(pile_a);
+	ft_free_pile(pile_a, 0);
 	free(pile_b);
-	//printf("%d\n", COUNT_OPERATIONS);
 	return (0);
 }

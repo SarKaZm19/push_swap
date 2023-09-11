@@ -2,7 +2,7 @@
 
 void	get_nb_rot_a(t_stack *tmp, t_stack *a, int len)
 {
-	tmp->nb_rot_a = ft_find_place_a(a, tmp->nbr);
+	tmp->nb_rot_a = ft_find_place(a, tmp->nbr);
 	tmp->rev_a = 0;
 	if (tmp->nb_rot_a > len / 2)
 	{

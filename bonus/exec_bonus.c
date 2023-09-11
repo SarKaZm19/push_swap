@@ -1,6 +1,6 @@
 #include "push_swap_bonus.h"
 
-int	exec_line(char *line, t_stack **a, t_stack **b)
+void	exec_op(char *line, t_stack **a, t_stack **b)
 {
 	if (!ft_strcmp(line, "sa\n"))
 		ft_sa(a);
@@ -24,7 +24,4 @@ int	exec_line(char *line, t_stack **a, t_stack **b)
 		ft_rrb(b);
 	else if (!ft_strcmp(line, "rrr\n"))
 		ft_rrr(a, b);
-	else
-		return(ft_putendl_fd("Error", 1), 1);
-	return (0);
 }

@@ -21,10 +21,10 @@ SRCS =	ft_atoi.c ft_strchr.c ft_strlcat.c ft_strlcpy.c ft_strlen.c \
 		ft_isblank.c ft_iscntrl.c ft_isgraph.c ft_ispunct.c ft_isspace.c \
 		ft_isupper.c ft_islower.c ft_isxdigit.c \
 		ft_strcmp.c ft_strndup.c \
-		get_next_line.c get_next_line_utils.c \
 		ft_free_str.c ft_free_tab.c \
 		ft_printf.c ft_printf_utils.c ft_print_c.c ft_print_cx.c ft_print_d.c ft_print_i.c \
-		ft_print_p.c ft_print_prct.c ft_print_s.c ft_print_u.c ft_print_x.c
+		ft_print_p.c ft_print_prct.c ft_print_s.c ft_print_u.c ft_print_x.c \
+		ft_lstnew.c ft_lstadd_back.c ft_lstlast.c
 
 
 #          ----------========== {     OBJS     } ==========----------

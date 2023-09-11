@@ -35,7 +35,7 @@ void	ft_rb(t_stack **b, int j)
 	if (!(*b) || !(*b)->next)
 		return ;
 	tmp = *b;
-	*b = ft_lstlast(*b);
+	*b = ft_stacklast(*b);
 	(*b)->next = tmp;
 	(*b) = tmp->next;
 	tmp->next = NULL;

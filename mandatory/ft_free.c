@@ -1,29 +1,5 @@
 #include "push_swap.h"
 
-void	ft_free_all(t_pile *a, t_pile *b)
-{
-	ft_free_stack(&(a->top));
-	ft_free_stack(&(b->top));
-	free(a);
-	free(b);
-	exit(1);
-}
-
-void	ft_free_tab(char **str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str && str[i])
-	{
-		free(str[i]);
-		str[i] = NULL;
-		i++;
-	}
-	free(str);
-	str = NULL;
-}
-
 void	ft_free_stack(t_stack **a)
 {
 	t_stack	*tmp;
@@ -37,4 +13,28 @@ void	ft_free_stack(t_stack **a)
 		free(*a);
 		(*a) = tmp;
 	}
+}
+
+void	ft_free_pile(t_pile *pile, int print_error)
+{
+	if (pile)
+	{
+		if (pile->top)
+			ft_free_stack(&(pile->top));
+		
+		if (pile->pre_sort)
+		{
+			free(pile->pre_sort);
+			pile->pre_sort = NULL;
+		}
+		if (pile->pivots)
+		{
+			free(pile->pivots);
+			pile->pivots = NULL;
+		}
+		free(pile);
+		pile = NULL;
+	}
+	if (print_error == 1)
+		prog_error();
 }

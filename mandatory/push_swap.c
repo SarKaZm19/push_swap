@@ -10,7 +10,7 @@ void	print_tab(int *tab, int size)
 	}
 }
 
-void	rotate_min_to_top(t_pile *a)
+static void	rotate_min_to_top(t_pile *a)
 {
 	int	i;
 
