@@ -50,7 +50,7 @@ t_stack	*get_av(int ac, char **av)
 
 	a = NULL;
 	if (ac < 2)
-		exit(0);
+		return (NULL);
 	if (ac == 2)
 	{
 		data_set = ft_split(av[1], ' ');
