@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_to_a.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fvastena <fvastena@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/12 14:32:17 by fvastena          #+#    #+#             */
+/*   Updated: 2023/09/12 14:35:45 by fvastena         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void	do_sync_rot(t_pile *a, t_pile *b, t_stack *to_move)
@@ -71,7 +83,6 @@ void	push_a(t_pile *a, t_pile *b)
 
 	while (b->actual_len != 0)
 	{
-		//chunk_size = a->full_len / nb_chunks;
 		nb_push = get_cheapest(a, b);
 		to_move = b->top;
 		while (to_move)
@@ -83,5 +94,3 @@ void	push_a(t_pile *a, t_pile *b)
 		rotate_push_a(a, b, to_move);
 	}
 }
-
-

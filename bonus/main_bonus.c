@@ -1,15 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fvastena <fvastena@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/12 15:08:27 by fvastena          #+#    #+#             */
+/*   Updated: 2023/09/12 15:12:00 by fvastena         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap_bonus.h"
-
-void	print_stack(t_stack *lst)
-{
-	printf("stack : \n");
-
-	while (lst)
-	{
-		printf("lst->content = %d\n", lst->nbr);
-		lst = lst->next;
-	}
-}
 
 static int	ft_issorted(t_stack *lst)
 {
@@ -24,10 +25,10 @@ static int	ft_issorted(t_stack *lst)
 
 int	add_op(t_list **ops, char *operation)
 {
-	static char *all_ops[11] = {"ra\n", "rra\n", "sa\n", "pa\n"
-			, "rb\n", "rrb\n", "sb\n", "pb\n", "rr\n", "rrr\n", "ss\n"};
 	int			i;
 	t_list		*new_op;
+	static char	*all_ops[11] = {"ra\n", "rra\n", "sa\n", "pa\n", "rb\n",
+		"rrb\n", "sb\n", "pb\n", "rr\n", "rrr\n", "ss\n"};
 
 	new_op = NULL;
 	i = 0;
@@ -46,7 +47,7 @@ int	add_op(t_list **ops, char *operation)
 	return (0);
 }
 
-static t_list	*gnl_loop()
+static t_list	*gnl_loop(void)
 {
 	t_list	*ops;
 	char	*line;
@@ -72,22 +73,17 @@ static t_list	*gnl_loop()
 	return (ops);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_stack	*a;
 	t_stack	*b;
 	t_list	*operations;
 	t_list	*tmp;
 
-	/* printf("ac = %d\n", ac);
-	int i = 0;
-	while (++i < ac)
-		printf("av[%d] = %s\n", i, av[i]); */
 	a = get_av(ac, av);
 	if (!a)
 		return (ft_free_stack(&a), prog_error(), 1);
 	b = NULL;
-	//print_stack(a);
 	operations = gnl_loop();
 	tmp = operations;
 	while (tmp && tmp->content)
@@ -96,10 +92,7 @@ int main(int ac, char **av)
 		tmp = tmp->next;
 	}
 	if (!ft_issorted(a) || b)
-	{
-		//print_stack(a);
 		ft_putendl_fd("KO", 1);
-	}
 	else
 		ft_putendl_fd("OK", 1);
 	ft_free_operations(&operations);

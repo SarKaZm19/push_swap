@@ -4,7 +4,7 @@ NAME = push_swap
 BONUS_NAME = checker
 RMF = rm -f
 RMD = rm -rf
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 HDDIR = -I includes
 LIB = libft/libft.a
 
@@ -52,12 +52,6 @@ OBJS = $(addprefix $(OBJS_DIR), $(MANDATORY_SRCS:.c=.o))
 OBJS_BONUS = $(addprefix $(OBJS_BONUS_DIR), $(BONUS_SRCS:.c=.o))
 
 VPATH = $(shell find $(SRCS_DIR) $(SRCS_BONUS_DIR) -type d)
-
-#VPATH = $(shell find $(SRCS_DIR) -type d)
-#VPATH += $(shell find $(SRCS_BONUS_DIR) -type d)
-
-#MANDATORY_OBJS = $(MANDATORY_SRCS:.c=.o)
-
 
 #           ----------========== {    REGLES    } ==========----------
 

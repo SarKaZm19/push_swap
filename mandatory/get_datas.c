@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_datas.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fvastena <fvastena@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/12 14:31:46 by fvastena          #+#    #+#             */
+/*   Updated: 2023/09/12 19:43:39 by fvastena         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	check_duplicates(int *datas, int len)
@@ -11,7 +23,7 @@ int	check_duplicates(int *datas, int len)
 		j = i;
 		while (++j < len)
 			if (datas[i] == datas[j])
-				return(1);
+				return (1);
 		i++;
 	}
 	return (0);
@@ -19,11 +31,11 @@ int	check_duplicates(int *datas, int len)
 
 static t_stack	*check_args(char **datas)
 {
-	int	i;
-	int	nb;
-	int	error_flag;
+	int		i;
+	int		nb;
+	int		error_flag;
 	t_stack	*a;
-	t_stack *new_node;
+	t_stack	*new_node;
 
 	a = NULL;
 	error_flag = 0;

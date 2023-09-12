@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_datas_bonus.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fvastena <fvastena@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/12 15:08:25 by fvastena          #+#    #+#             */
+/*   Updated: 2023/09/12 15:10:05 by fvastena         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap_bonus.h"
 
 static int	check_duplicates(t_stack *a)
@@ -6,7 +18,6 @@ static int	check_duplicates(t_stack *a)
 	t_stack	*mem;
 
 	tmp = a;
-
 	while (tmp)
 	{
 		mem = tmp->next;
@@ -23,11 +34,11 @@ static int	check_duplicates(t_stack *a)
 
 static t_stack	*check_args(char **datas)
 {
-	int	i;
-	int	nb;
-	int	error_flag;
+	int		i;
+	int		nb;
+	int		error_flag;
 	t_stack	*a;
-	t_stack *new_node;
+	t_stack	*new_node;
 
 	a = NULL;
 	error_flag = 0;

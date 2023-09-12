@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fvastena <fvastena@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/12 15:06:51 by fvastena          #+#    #+#             */
+/*   Updated: 2023/09/12 15:14:46 by fvastena         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -33,8 +45,6 @@ typedef struct s_pile
 	int		*pivots;
 	t_stack	*top;
 }			t_pile;
-
-//extern int COUNT_OPERATIONS;
 
 // chunk_pivots.c
 int		define_chunks(int size);
@@ -72,7 +82,7 @@ int		*get_tab(t_pile *pile_a);
 void	ft_sort_int_tab(int *tab, int size);
 
 // main.c
-int	ft_issorted(t_stack *lst);
+int		ft_issorted(t_stack *lst);
 
 // min_max.c
 int		ft_max(t_stack *a);
@@ -95,12 +105,9 @@ void	ft_sb(t_stack **b, int j);
 void	ft_rb(t_stack **b, int j);
 void	ft_rrb(t_stack **b, int j);
 
-
 // push_all_b.c
 void	push_one_chunk(t_pile *a, t_pile *b);
 void	push_b(t_pile *a, t_pile *b);
-void	push_first_two_chunks(t_pile *a, t_pile *b, int chunk_size);
-void	push_chunk(t_pile *a, t_pile *b, int index, int chunk_size);
 
 // push_swap.c
 void	push_swap(t_pile *pile_a, t_pile *pile_b);
@@ -117,8 +124,5 @@ int		ft_lstsize(t_stack *lst);
 t_stack	*ft_stacklast(t_stack *lst);
 void	ft_add_back(t_stack **stack, t_stack *stack_new);
 t_stack	*ft_stack_new(int content);
-
-//misc
-void	print_stack(t_stack *a);
 
 #endif

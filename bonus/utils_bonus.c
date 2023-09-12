@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fvastena <fvastena@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/12 15:08:37 by fvastena          #+#    #+#             */
+/*   Updated: 2023/09/12 15:28:16 by fvastena         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap_bonus.h"
 
 int	ft_lstsize(t_stack *lst)
@@ -42,28 +54,31 @@ t_stack	*ft_stack_new(int content)
 	return (new);
 }
 
-int ft_atoi2(char *str, int *error_flag) 
+int	ft_atoi2(char *str, int *error_flag)
 {
-	int sign = 1;
-	long num = 0;
-	int i = 0;
+	int		sign;
+	long	num;
+	int		i;
 
-	while (str[i] == ' ')
+	sign = 1;
+	num = 0;
+	i = 0;
+	while (ft_isspace(str[i]))
 		i++;
 	if (str[i] == '-' || str[i] == '+')
-	{
-		if ((str[i + 1] && !ft_isdigit(str[i + 1])) || !str[i + 1])
-			return (*error_flag = -1);
 		if (str[i++] == '-')
 			sign = -1;
-	}
+	if ((str[i] && !ft_isdigit(str[i])) || !str[i])
+		return (*error_flag = -1);
 	while (ft_isdigit(str[i]))
+	{
 		num = (num * 10) + (str[i++] - '0');
-	while (str[i] == ' ')
+		if (num * sign > 2147483647 || num * sign < -2147483648)
+			return (*error_flag = -1);
+	}
+	while (ft_isspace(str[i]))
 		i++;
 	if (str[i])
-		return (*error_flag = -1);
-	if (num * sign > 2147483647 || num * sign < -2147483648)
 		return (*error_flag = -1);
 	return (sign * (int)num);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_piles.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fvastena <fvastena@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/12 14:31:49 by fvastena          #+#    #+#             */
+/*   Updated: 2023/09/12 14:42:02 by fvastena         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_pile	*init_pile_a(int ac, char **av)
@@ -21,8 +33,8 @@ t_pile	*init_pile_a(int ac, char **av)
 		return (ft_free_pile(pile_a, 1), NULL);
 	ft_sort_int_tab(pile_a->pre_sort, pile_a->full_len);
 	pile_a->nb_chunks = define_chunks(pile_a->full_len);
-	pile_a->pivots = set_pivots(pile_a->pre_sort, pile_a->nb_chunks
-			, pile_a->full_len);
+	pile_a->pivots = set_pivots(pile_a->pre_sort, pile_a->nb_chunks,
+			pile_a->full_len);
 	if (!pile_a->pivots)
 		return (ft_free_pile(pile_a, 1), NULL);
 	return (pile_a);

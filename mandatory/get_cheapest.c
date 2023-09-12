@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_cheapest.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fvastena <fvastena@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/12 14:31:43 by fvastena          #+#    #+#             */
+/*   Updated: 2023/09/12 14:39:32 by fvastena         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int get_cheapest(t_pile *a, t_pile *b)
+int	get_cheapest(t_pile *a, t_pile *b)
 {
 	int		cheapest_moves;
 	int		index;

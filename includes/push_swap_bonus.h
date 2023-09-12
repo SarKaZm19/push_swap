@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_bonus.h                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fvastena <fvastena@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/12 15:06:54 by fvastena          #+#    #+#             */
+/*   Updated: 2023/09/12 15:07:31 by fvastena         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_BONUS_H
 # define PUSH_SWAP_BONUS_H
 
@@ -20,7 +32,7 @@ typedef struct s_stack
 char	*get_next_line(int fd, int *read_error);
 
 // error_bonus.c
-void	prog_error();
+void	prog_error(void);
 
 // exec_bonus.c 
 void	exec_op(char *line, t_stack **a, t_stack **b);
@@ -46,8 +58,8 @@ void	ft_rb(t_stack **b);
 void	ft_rrb(t_stack **b);
 
 // utils_bonus.c
-int ft_atoi2(char *str, int *error_flag);
-int	ft_lstsize(t_stack *lst);
+int		ft_atoi2(char *str, int *error_flag);
+int		ft_lstsize(t_stack *lst);
 t_stack	*ft_stacklast(t_stack *lst);
 void	ft_add_back(t_stack **stack, t_stack *stack_new);
 t_stack	*ft_stack_new(int content);

@@ -1,14 +1,16 @@
-#include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fvastena <fvastena@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/12 14:32:15 by fvastena          #+#    #+#             */
+/*   Updated: 2023/09/12 14:56:26 by fvastena         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	print_tab(int *tab, int size)
-{
-	int i = 0;
-	while (i < size)
-	{
-		printf("%d\n", tab[i]);
-		i++;
-	}
-}
+#include "push_swap.h"
 
 static void	rotate_min_to_top(t_pile *a)
 {
@@ -29,7 +31,6 @@ static void	rotate_min_to_top(t_pile *a)
 
 void	push_swap(t_pile *a, t_pile *b)
 {
-
 	b->top = NULL;
 	if (a->full_len == 2)
 		ft_sa(&(a->top), 0);
@@ -43,18 +44,7 @@ void	push_swap(t_pile *a, t_pile *b)
 			push_b(a, b);
 		if (!ft_issorted(a->top))
 			ft_sort_three(&(a->top));
-		//printf("len_a = %d len_b = %d\n", a->actual_len, b->actual_len);
-		/* printf("a>>>\n");
-		print_stack(a->top);
-		printf("b>>>\n");
-		print_stack(b->top); */
-		//i = nb_chunks * 2 - 4;
 		push_a(a, b);
-		/* printf("len_a = %d, len_b = %d\n", a->actual_len, b->actual_len);
-		printf("a>>>\n");
-		print_stack(a->top);
-		printf("b>>>\n");
-		print_stack(b->top); */
 		rotate_min_to_top(a);
 	}
 }
