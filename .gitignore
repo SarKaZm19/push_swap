@@ -1,0 +1,15 @@
+*.o
+*.out
+push_swap
+checker
+mandatory_objs/
+bonus_objs/
+.DS_Store
+tests/a.out
+tests/compare*.txt
+tests/lists*.txt
+tests/operations_count.txt
+tests/outfile
+tests/output*.txt
+tests/variable_occurrences.txt
+tests/temp_output.txt
