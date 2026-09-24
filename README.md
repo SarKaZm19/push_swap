@@ -13,7 +13,11 @@ The challenge is unusual: sort a set of integers using only two stacks and a ver
 
 ## Approach
 
-My implementation uses a chunk/pivot strategy to progressively move values from stack A to stack B.
+I initially experimented with a **Turk-style approach**, but eventually moved away from it because I was not satisfied with the operation counts I was getting.
+
+The turning point was thinking about what makes `push_swap` unusual: moving values between two stacks makes the problem feel less like an abstract sort and more like a **physical sorting process**. Instead of only asking which value should come next, I started thinking about how values could be distributed spatially between A and B so that the second half of the sort would become cheaper.
+
+That led to the chunk/pivot strategy used in this implementation.
 
 The strategy adapts to the input size:
 
@@ -22,7 +26,7 @@ The strategy adapts to the input size:
 - 300–599 values: six chunks;
 - 600 values and above: one chunk per 100 values.
 
-For multi-chunk inputs, values are progressively distributed from A to B around calculated pivots. Lower values inside the current range can be rotated in B while the remaining values continue to be pushed, which creates the characteristic two-sided distribution visible in the visualizer.
+For multi-chunk inputs, values are progressively distributed from A to B around calculated pivots. Lower values inside the current range can be rotated in B while the remaining values continue to be pushed, creating the characteristic two-sided distribution visible in the visualizer.
 
 When rebuilding stack A, the program calculates rotation costs for candidate values and selects the cheapest move, combining rotations with `rr` or `rrr` when possible.
 
@@ -30,13 +34,29 @@ I originally referred to this approach as my **“papillon”** strategy while d
 
 ## Visualizer
 
-The repository also includes a small standalone visualizer built after the original 42 project to make the algorithm easier to inspect and present.
+The repository includes a small standalone visualizer in [`visualizer/`](visualizer/) that I added after the original 42 project to make the algorithm easier to inspect and present.
 
-It runs the real local `./push_swap` executable, captures the generated instructions and replays them in a browser. The visualizer does not implement a separate sorting algorithm: every displayed state comes from the operations produced by this project.
+It runs the real local `./push_swap` executable, captures the generated instructions and replays them in a browser. The visualizer does **not** implement a separate sorting algorithm: every displayed state comes from the operations produced by this project.
 
-For larger inputs, values are colored by rank/chunk so the distribution phase becomes visible. This makes it possible to see the chunk-based “papillon” structure forming in stack B before the second phase rebuilds stack A using the cheapest available rotations.
+For larger inputs, values are colored by rank/chunk so the distribution phase becomes visible. This makes the “papillon” structure in stack B much easier to read before the second phase rebuilds stack A using the cheapest available rotations.
 
-The visualizer includes:
+### Distribution phase
+
+This 500-value run is shown during the A → B distribution phase. At this point, 389 values have already moved to B and the chunk-based butterfly structure is clearly visible.
+
+<p align="center">
+  <img src="visualizer/Capture%20d%27%C3%A9cran%202026-09-25%20013533.png" alt="push_swap visualizer showing the chunk-based butterfly distribution in stack B" width="95%">
+</p>
+
+### Sorted result
+
+The same run after all **4,237 operations** generated for this particular input: stack B is empty and the 500 values have been rebuilt in ascending order in stack A.
+
+<p align="center">
+  <img src="visualizer/Capture%20d%27%C3%A9cran%202026-09-25%20013444.png" alt="push_swap visualizer showing the final sorted 500-value stack" width="95%">
+</p>
+
+### Visualizer features
 
 - stack A / stack B replay;
 - play, pause and operation-by-operation navigation;
@@ -51,7 +71,7 @@ Run it from the repository root after building `push_swap`:
 
 ```bash
 make
-python3 push_swap_visualizer.py
+python3 visualizer/push_swap_visualizer.py
 ```
 
 Then open:
@@ -96,6 +116,8 @@ The program rejects invalid integer input, duplicates and values outside the `in
 ## What this project demonstrates
 
 push_swap is mainly about algorithm design under artificial constraints. The interesting part is not simply producing a sorted result, but deciding how to represent the problem, estimate move costs and trade implementation complexity against operation count.
+
+For me, the project also became an exercise in changing the representation of a problem: moving away from an algorithm that did not meet my goals, rethinking the stacks as a physical sorting mechanism, and designing a strategy around that observation.
 
 ---
 
