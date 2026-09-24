@@ -1,0 +1,62 @@
+name: Temporary runtime test
+
+on:
+  push:
+    branches:
+      - codex-runtime-test
+
+jobs:
+  build-and-smoke-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build push_swap
+        run: make
+
+      - name: Build checker
+        run: make bonus
+
+      - name: Smoke test - two values
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUTPUT="$(./push_swap 2 1)"
+          printf '%s\n' "$OUTPUT"
+          RESULT="$(printf '%s\n' "$OUTPUT" | ./checker 2 1)"
+          echo "checker: $RESULT"
+          test "$RESULT" = "OK"
+
+      - name: Smoke test - already sorted
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUTPUT="$(./push_swap 1 2 3 4 5)"
+          printf 'operations=%s\n' "$(printf '%s' "$OUTPUT" | sed '/^$/d' | wc -l)"
+          test -z "$OUTPUT"
+
+      - name: Random 100-value validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          ARG="$(seq 1 100 | shuf | tr '\n' ' ')"
+          OUTPUT="$(./push_swap $ARG)"
+          RESULT="$(printf '%s\n' "$OUTPUT" | ./checker $ARG)"
+          COUNT="$(printf '%s\n' "$OUTPUT" | sed '/^$/d' | wc -l)"
+          echo "checker: $RESULT"
+          echo "operations: $COUNT"
+          test "$RESULT" = "OK"
+
+      - name: Random 500-value validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          ARG="$(seq 1 500 | shuf | tr '\n' ' ')"
+          OUTPUT="$(./push_swap $ARG)"
+          RESULT="$(printf '%s\n' "$OUTPUT" | ./checker $ARG)"
+          COUNT="$(printf '%s\n' "$OUTPUT" | sed '/^$/d' | wc -l)"
+          echo "checker: $RESULT"
+          echo "operations: $COUNT"
+          test "$RESULT" = "OK"
