@@ -15,7 +15,19 @@ The challenge is unusual: sort a set of integers using only two stacks and a ver
 
 I initially experimented with a **Turk-style approach**, but eventually moved away from it because I was not satisfied with the operation counts I was getting.
 
-The turning point was thinking about what makes `push_swap` unusual: moving values between two stacks makes the problem feel less like an abstract sort and more like a **physical sorting process**. Instead of only asking which value should come next, I started thinking about how values could be distributed spatially between A and B so that the second half of the sort would become cheaper.
+The turning point was changing how I represented the problem.
+
+`push_swap` is still an algorithmic sorting problem, but its main constraint is unusual: values cannot simply be compared and exchanged at arbitrary positions. They have to be **physically moved through two stacks** using a very small vocabulary of operations.
+
+Instead of thinking about the input as an array that needed to be sorted, I started thinking about it as a set of values that had to be **positioned, moved and reorganized** between A and B. Every useful value has a physical cost to reach, every transfer changes the geometry of both stacks, and some movements can be shared through `rr` and `rrr`.
+
+That changed the question from:
+
+> Which value should come next?
+
+to something closer to:
+
+> How can I arrange the values now so that the remaining movements become cheaper later?
 
 That led to the chunk/pivot strategy used in this implementation.
 
@@ -115,9 +127,9 @@ The program rejects invalid integer input, duplicates and values outside the `in
 
 ## What this project demonstrates
 
-push_swap is mainly about algorithm design under artificial constraints. The interesting part is not simply producing a sorted result, but deciding how to represent the problem, estimate move costs and trade implementation complexity against operation count.
+`push_swap` is an algorithm design problem under artificial movement constraints. The difficult part is not merely discovering the final sorted order: it is planning a sequence of legal moves that transforms one physical stack configuration into another while keeping the instruction count low.
 
-For me, the project also became an exercise in changing the representation of a problem: moving away from an algorithm that did not meet my goals, rethinking the stacks as a physical sorting mechanism, and designing a strategy around that observation.
+For me, the most important lesson was therefore not a particular sorting algorithm. It was learning to **change the representation of the problem** when the first approach was not good enough: moving away from a Turk-style strategy, recognizing the importance of the physical movement model, and designing a solution around the actual constraints of the system.
 
 ---
 
